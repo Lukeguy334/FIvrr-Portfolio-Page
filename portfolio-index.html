@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lucas Silva — Web Design &amp; Development</title>
+<meta name="description" content="Lucas Silva builds fast, custom-coded websites for small businesses and personal brands in Tampa, FL. Hand-built, responsive, and launched on your own domain." />
+
+<!-- Link preview -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Lucas Silva — Web Design &amp; Development" />
+<meta property="og:description" content="Hand-coded websites for small businesses and personal brands. Fast, clean, and launched on your own domain." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --paper:#f8f7f4;
+    --ink:#17161b;
+    --muted:#5b5a63;
+    --line:#e4e1da;
+    --panel:#efede7;
+    --accent:#3a40e8;
+    --accent-press:#2a2fc4;
+    --white:#ffffff;
+    --display:"Space Grotesk",system-ui,sans-serif;
+    --body:"Inter",system-ui,sans-serif;
+    --mono:"Space Mono",ui-monospace,monospace;
+    --maxw:1120px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);background:var(--paper);color:var(--ink);
+    line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:var(--display);line-height:1.05;letter-spacing:-.02em;font-weight:600}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  .mono{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;font-family:var(--display);font-weight:600;
+    font-size:.96rem;padding:.8rem 1.4rem;border-radius:9px;border:1.5px solid transparent;
+    cursor:pointer;transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn-primary{background:var(--accent);color:var(--white)}
+  .btn-primary:hover{background:var(--accent-press);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .btn .arr{transition:transform .15s ease}
+  .btn:hover .arr{transform:translate(2px,-2px)}
+
+  /* ---------- nav ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(248,247,244,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:var(--display);font-weight:700;font-size:1.18rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.55rem}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a:not(.btn){font-size:.95rem;font-weight:500;color:var(--muted);transition:color .15s}
+  .nav-links a:not(.btn):hover{color:var(--ink)}
+  @media(max-width:720px){.nav-links a:not(.btn){display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:96px 0 72px;position:relative}
+  .hero .eyebrow{color:var(--accent);margin-bottom:26px;display:inline-block}
+  .hero h1{font-size:clamp(2.6rem,6.2vw,4.5rem);font-weight:700;max-width:16ch;margin-bottom:26px}
+  .hero h1 em{font-style:normal;position:relative;white-space:nowrap}
+  .hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.16em;background:var(--accent);opacity:.22;z-index:-1}
+  .hero p.lead{font-size:1.18rem;color:var(--muted);max-width:52ch;margin-bottom:36px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .trust{display:flex;gap:26px;flex-wrap:wrap;color:var(--muted)}
+  .trust span{display:flex;align-items:center;gap:.5rem}
+  .trust svg{width:16px;height:16px;color:var(--accent);flex:none}
+
+  /* section heads */
+  .sec{padding:84px 0}
+  .sec-head{margin-bottom:46px;max-width:60ch}
+  .sec-head .eyebrow{color:var(--accent);margin-bottom:14px;display:inline-block}
+  .sec-head h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:600;margin-bottom:12px}
+  .sec-head p{color:var(--muted);font-size:1.05rem}
+
+  /* ---------- work / project cards ---------- */
+  .work{display:grid;grid-template-columns:1fr;gap:34px}
+  .proj{
+    display:grid;grid-template-columns:1.15fr 1fr;gap:0;border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;background:var(--white);transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .proj:hover{transform:translateY(-4px);box-shadow:0 24px 50px -28px rgba(20,18,30,.45)}
+  @media(max-width:760px){.proj{grid-template-columns:1fr}}
+
+  /* browser frame + branded tile */
+  .frame{padding:18px;background:var(--panel);display:flex;flex-direction:column}
+  .chrome{display:flex;align-items:center;gap:7px;padding:0 4px 11px}
+  .chrome i{width:11px;height:11px;border-radius:50%;background:#cfcabf;display:block}
+  .chrome .url{margin-left:10px;font-family:var(--mono);font-size:.68rem;color:#8b8678;background:var(--white);border:1px solid var(--line);border-radius:6px;padding:3px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+  .tile{flex:1;border-radius:9px;min-height:230px;display:flex;flex-direction:column;justify-content:center;padding:30px;position:relative;overflow:hidden}
+
+  /* driftline tile */
+  .t-drift{background:radial-gradient(120% 130% at 80% 0%,#16515a,#0d3137 55%,#0a2327)}
+  .t-drift .waves{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+  .t-drift .waves b{display:block;height:4px;width:64px;border-radius:3px;background:#46c3b4}
+  .t-drift .waves b:nth-child(2){width:78px;opacity:.8}
+  .t-drift .waves b:nth-child(3){width:54px;opacity:.6}
+  .t-drift .nm{font-family:var(--display);font-weight:700;font-size:1.7rem;color:#fff;letter-spacing:-.02em}
+  .t-drift .sb{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#7fd8cc;margin-top:6px}
+
+  /* tailorflow tile */
+  .t-tailor{background:#0a0a0a;border:1px solid #1d1d1d}
+  .t-tailor .nm{font-family:var(--display);font-weight:700;font-size:1.7rem;color:#fff;letter-spacing:-.02em;margin-bottom:20px}
+  .t-tailor .nm i{font-style:italic;color:#3ecf8e}
+  .t-tailor .score{display:flex;align-items:center;gap:14px;font-family:var(--display);font-weight:700}
+  .t-tailor .s1{color:#6b6b6b;font-size:1.5rem}
+  .t-tailor .s2{color:#3ecf8e;font-size:1.9rem}
+  .t-tailor .arrowm{color:#3ecf8e;font-size:1.2rem}
+  .t-tailor .lab{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#6b6b6b;margin-top:8px}
+
+  /* portfolio tile */
+  .t-port{background:linear-gradient(150deg,#211c52,#1a1740 60%,#14122e)}
+  .t-port .nm{font-family:var(--display);font-weight:700;font-size:1.55rem;color:#fff;letter-spacing:-.02em}
+  .t-port .sb{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#a5b4fc;margin-top:6px;margin-bottom:20px}
+  .t-port .bars{display:flex;align-items:flex-end;gap:9px;height:62px}
+  .t-port .bars b{width:20px;border-radius:4px 4px 0 0;background:linear-gradient(#a5b4fc,#6366f1);display:block}
+
+  /* project meta side */
+  .meta{padding:32px 30px;display:flex;flex-direction:column}
+  .meta .kicker{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .meta h3{font-size:1.5rem;margin-bottom:10px}
+  .meta p{color:var(--muted);font-size:.98rem;margin-bottom:18px}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+  .tags span{font-size:.76rem;font-weight:500;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+  .meta .visit{margin-top:auto;display:inline-flex;align-items:center;gap:.45rem;font-family:var(--display);font-weight:600;color:var(--ink);font-size:.95rem;width:fit-content;border-bottom:2px solid var(--accent);padding-bottom:2px;transition:gap .15s}
+  .meta .visit:hover{gap:.8rem}
+
+  /* ---------- services ---------- */
+  .services{background:var(--ink);color:var(--paper)}
+  .services .eyebrow{color:#9b9ff6}
+  .services .sec-head h2{color:#fff}
+  .services .sec-head p{color:#a7a6b0}
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:860px){.tiers{grid-template-columns:1fr}}
+  .tier{background:#211f28;border:1px solid #2e2c38;border-radius:14px;padding:28px;display:flex;flex-direction:column;position:relative;transition:transform .2s,border-color .2s}
+  .tier:hover{transform:translateY(-4px);border-color:#4a47e8}
+  .tier.feat{border-color:var(--accent);background:#23223a}
+  .tier .badge{position:absolute;top:-11px;left:28px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .tier .tname{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#9b9ff6;margin-bottom:14px}
+  .tier .price{font-family:var(--display);font-weight:700;font-size:2.1rem;color:#fff;margin-bottom:4px}
+  .tier .price span{font-size:.9rem;font-weight:400;color:#a7a6b0}
+  .tier .tdesc{color:#a7a6b0;font-size:.92rem;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid #2e2c38}
+  .tier ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+  .tier li{position:relative;padding-left:24px;font-size:.92rem;color:#cdccd4}
+  .tier li::before{content:"";position:absolute;left:0;top:6px;width:8px;height:8px;border-right:2px solid #6cead0;border-bottom:2px solid #6cead0;transform:rotate(45deg)}
+  .tier .btn{margin-top:auto;justify-content:center;width:100%}
+  .tier .btn-tier{background:#2e2c38;color:#fff}
+  .tier .btn-tier:hover{background:#3a3848}
+  .tier.feat .btn-tier{background:var(--accent)}
+  .tier.feat .btn-tier:hover{background:var(--accent-press)}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:54px;align-items:start}
+  @media(max-width:780px){.about-grid{grid-template-columns:1fr;gap:32px}}
+  .about-grid p{font-size:1.12rem;color:var(--ink);margin-bottom:18px;max-width:54ch}
+  .about-grid p.sub{color:var(--muted);font-size:1.02rem}
+  .skills{display:flex;flex-wrap:wrap;gap:8px}
+  .skills span{font-family:var(--mono);font-size:.72rem;color:var(--muted);background:var(--white);border:1px solid var(--line);border-radius:7px;padding:6px 11px}
+  .skill-head{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block}
+
+  /* ---------- contact CTA ---------- */
+  .cta{padding:96px 0}
+  .cta-box{background:radial-gradient(130% 160% at 0% 0%,#3a40e8,#2a2fc4 60%,#211f28);border-radius:22px;padding:64px 52px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .cta-box h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;margin-bottom:14px;max-width:18ch;margin-left:auto;margin-right:auto}
+  .cta-box p{color:#d8d8f7;font-size:1.1rem;max-width:46ch;margin:0 auto 32px}
+  .cta-box .btn-primary{background:#fff;color:var(--accent)}
+  .cta-box .btn-primary:hover{background:#f0f0ff;transform:translateY(-2px)}
+  .cta-box .em{display:block;margin-top:20px;font-family:var(--mono);font-size:.82rem;color:#c3c3f0}
+  .cta-box .em a{border-bottom:1px solid rgba(255,255,255,.4)}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:38px 0}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+  .foot .brand{font-size:1rem;color:var(--ink)}
+  .foot a{color:var(--muted);transition:color .15s}
+  .foot a:hover{color:var(--ink)}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><span class="dot"></span>Lucas Silva</a>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a class="btn btn-primary" href="REPLACE_FIVERR_URL" target="_blank" rel="noopener">Hire me</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow mono reveal">Web Design &amp; Development · Tampa, FL</span>
+    <h1 class="reveal">Websites that look <em>custom</em>, because they are.</h1>
+    <p class="lead reveal">Hand-coded sites for small businesses and personal brands. Fast, clean, and launched on your own domain. You bring the idea, I handle the design, the build, and going live.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="REPLACE_FIVERR_URL" target="_blank" rel="noopener">Hire me on Fiverr <span class="arr">↗</span></a>
+      <a class="btn btn-ghost" href="#work">See my work</a>
+    </div>
+    <div class="trust reveal">
+      <span><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Hand-coded, not templates</span>
+      <span><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Mobile-responsive</span>
+      <span><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>You own everything</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="sec" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow mono">Selected work</span>
+      <h2>Real sites, built and launched.</h2>
+      <p>A few projects I designed and coded from scratch. Click any one to see it live.</p>
+    </div>
+
+    <div class="work">
+
+      <!-- Driftline -->
+      <article class="proj reveal">
+        <div class="frame">
+          <div class="chrome"><i></i><i></i><i></i><span class="url">driftlineexteriorcleaning.com</span></div>
+          <a class="tile t-drift" href="https://driftlineexteriorcleaning.com/" target="_blank" rel="noopener" aria-label="Visit Driftline Exterior Cleaning">
+            <div class="waves"><b></b><b></b><b></b></div>
+            <div class="nm">Driftline</div>
+            <div class="sb">Exterior Cleaning</div>
+          </a>
+        </div>
+        <div class="meta">
+          <span class="kicker">Small business site</span>
+          <h3>Driftline Exterior Cleaning</h3>
+          <p>A full marketing site for a pressure-washing business. Custom branding, an interactive before/after slider, service pricing with expandable details, and a quote form wired to email.</p>
+          <div class="tags"><span>Custom design</span><span>Before/after slider</span><span>Quote form</span><span>Responsive</span></div>
+          <a class="visit" href="https://driftlineexteriorcleaning.com/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <!-- Tailorflow -->
+      <article class="proj reveal">
+        <div class="frame">
+          <div class="chrome"><i></i><i></i><i></i><span class="url">lukeguy334.github.io/tailorflow</span></div>
+          <a class="tile t-tailor" href="https://lukeguy334.github.io/tailorflow/" target="_blank" rel="noopener" aria-label="Visit Tailorflow">
+            <div class="nm">Tailor<i>flow</i></div>
+            <div class="score"><span class="s1">42%</span><span class="arrowm">→</span><span class="s2">78%</span></div>
+            <div class="lab">Resume fit score</div>
+          </a>
+        </div>
+        <div class="meta">
+          <span class="kicker">Web app · SaaS</span>
+          <h3>Tailorflow</h3>
+          <p>A resume-tailoring web app for students. Multi-step onboarding, live pricing tiers, a results dashboard, tracker, and calendar, all in a fast single-page build with a clean dark interface.</p>
+          <div class="tags"><span>Web app UI</span><span>Onboarding flow</span><span>Pricing</span><span>Dashboard</span></div>
+          <a class="visit" href="https://lukeguy334.github.io/tailorflow/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <!-- Portfolio -->
+      <article class="proj reveal">
+        <div class="frame">
+          <div class="chrome"><i></i><i></i><i></i><span class="url">lukeguy334.github.io/Portfolio_Landing</span></div>
+          <a class="tile t-port" href="https://lukeguy334.github.io/Portfolio_Landing/portfolio.html" target="_blank" rel="noopener" aria-label="Visit analytics portfolio">
+            <div class="nm">Lucas Silva</div>
+            <div class="sb">Analytics Portfolio</div>
+            <div class="bars"><b style="height:40%"></b><b style="height:65%"></b><b style="height:48%"></b><b style="height:88%"></b><b style="height:60%"></b><b style="height:100%"></b></div>
+          </a>
+        </div>
+        <div class="meta">
+          <span class="kicker">Portfolio + dashboards</span>
+          <h3>Analytics Portfolio</h3>
+          <p>A personal portfolio showcasing interactive data dashboards. Clean project grid, animated chart visuals, certification cards, and a built-in content panel, designed to make the numbers make sense.</p>
+          <div class="tags"><span>Portfolio</span><span>Data viz</span><span>Chart.js</span><span>Responsive</span></div>
+          <a class="visit" href="https://lukeguy334.github.io/Portfolio_Landing/portfolio.html" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="sec services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow mono">What I build</span>
+      <h2>Pick a starting point.</h2>
+      <p>Clear packages, no surprises. Every build is custom-coded, mobile-ready, and set up on your own domain. Need something specific? Just ask.</p>
+    </div>
+    <div class="tiers">
+
+      <div class="tier reveal">
+        <div class="tname">One-page site</div>
+        <div class="price">$65<span> / from</span></div>
+        <p class="tdesc">A single, polished page. Perfect for a service business or personal brand that needs a sharp first impression.</p>
+        <ul>
+          <li>Custom one-page design</li>
+          <li>Fully mobile-responsive</li>
+          <li>Contact form</li>
+          <li>Your branding and colors</li>
+        </ul>
+        <a class="btn btn-tier" href="REPLACE_FIVERR_URL" target="_blank" rel="noopener">Start here</a>
+      </div>
+
+      <div class="tier feat reveal">
+        <span class="badge">Most popular</span>
+        <div class="tname">Multi-page site</div>
+        <div class="price">$130<span> / from</span></div>
+        <p class="tdesc">A complete small-business site with room to grow, and I handle getting it live on your domain.</p>
+        <ul>
+          <li>Up to 3 custom pages</li>
+          <li>Contact form</li>
+          <li>Basic SEO and link previews</li>
+          <li>Full setup on your domain</li>
+        </ul>
+        <a class="btn btn-tier" href="REPLACE_FIVERR_URL" target="_blank" rel="noopener">Start here</a>
+      </div>
+
+      <div class="tier reveal">
+        <div class="tname">Site + features</div>
+        <div class="price">$250<span> / from</span></div>
+        <p class="tdesc">For businesses that need more than a brochure: take payments, accept bookings, or add custom functionality.</p>
+        <ul>
+          <li>Up to 5 custom pages</li>
+          <li>Payments or booking integration</li>
+          <li>Revisions included</li>
+          <li>Post-launch support</li>
+        </ul>
+        <a class="btn btn-tier" href="REPLACE_FIVERR_URL" target="_blank" rel="noopener">Start here</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="sec" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="eyebrow mono" style="color:var(--accent);display:inline-block;margin-bottom:16px">About</span>
+      <p>I'm Lucas, a web designer based in Tampa. I build every site by hand in code, so you get something tailored to your business instead of a recycled template that a hundred other companies are using.</p>
+      <p class="sub">My background blends analytics and writing, which means I care about both how a site looks and whether it actually gets people to call, book, or buy. When the build is done, I set everything up on your domain and hand it over. You own all of it.</p>
+    </div>
+    <div class="reveal">
+      <span class="skill-head">What I work with</span>
+      <div class="skills">
+        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive design</span><span>Domain setup</span><span>Hosting / deploy</span><span>Contact forms</span><span>SEO basics</span><span>Stripe</span><span>Analytics</span><span>Branding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT CTA ============ -->
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Let's build your site.</h2>
+      <p>Tell me about your business and what you need. I'll get you a clean, custom site that's ready to share.</p>
+      <a class="btn btn-primary" href="REPLACE_FIVERR_URL" target="_blank" rel="noopener">Hire me on Fiverr ↗</a>
+      <span class="em">Prefer email? <a href="mailto:lsilva334256@gmail.com">lsilva334256@gmail.com</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <span class="brand"><span style="color:var(--accent)">●</span> Lucas Silva</span>
+    <span>Web design &amp; development · Tampa, FL</span>
+    <span>© <span id="yr"></span> Lucas Silva</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // scroll reveal
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{threshold:.12});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+</body>
+</html>
